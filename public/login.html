@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="./main.css">
+    <link rel="stylesheet" type="text/css" href="./css/auth.css">
+
+    <title>Login</title>
+</head>
+
+<body >
+    <p id="title" onclick="document.location.href='/'"><span>Habit</span>Trackr</p>
+    
+    <div id="auth">
+        <p id="header">Login</p>
+        <form onsubmit="return false;">
+            <label for="email">Email: </label>
+            <input id="email" type="email">
+            <br />
+            <label for="password">Password: </label>
+            <input id="password" type="password">
+            <br />
+            <button onclick="login()">Login</button>
+        </form>
+
+        <p id="error"></p>
+    </div>
+</body>
+
+<script src="cookies.js"></script>
+
+<script>
+    function login() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        if(email && password) {
+            fetch("/auth/login", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8', },
+                body: new URLSearchParams({
+                    email: email,
+                    password: password
+                })
+            })
+            .then((resp) => resp.json())
+            .then(function(response) {
+                if(response.error) {
+                    document.getElementById("error").innerHTML = response.error;
+                } else if(response.success) {
+                    setCookie("session", response.session, 1);
+                    document.location.href = "./dashboard.html";
+                }
+                return response;
+            })
+        }
+    }
+</script>
+
+</html>
