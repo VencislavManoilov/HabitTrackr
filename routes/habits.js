@@ -4,20 +4,20 @@ const path = require("path");
 const router = express.Router();
 
 router.post("/create", (req, res) => {
-    const { id, text, when } = req.body;
+    const { id, text, when, goal } = req.body;
 
-    if(id && text && when) {
+    if(id && text && when && goal) {
+        if(!goal) {
+            res.status(400).json({ error: "No goal set" });
+            return;
+        }
+
         let user = req.users.find(u => u.id === id);
 
         if(user) {
-            user.habits.push(new req.Habit(text, JSON.parse(when)));
+            user.habits.push(new req.Habit(text, parseInt(when), goal));
 
-            fs.writeFileSync(path.join(__dirname, "../users.json"), JSON.stringify(req.users), (err) => {
-                if(err) {
-                    console.log("Error: ", err);
-                    return res.status(400).json({ error: "Something went wrong" });
-                }
-            });
+            saveUsers(req.users);
 
             res.status(200).json(user.habits);
         } else {
@@ -30,18 +30,21 @@ router.post("/create", (req, res) => {
 })
 
 router.post("/check", (req, res) => {
-    const { id, text, status } = req.body;
+    const { id, text } = req.body;
 
-    if(id && text && status) {
+    if(id && text) {
         let user = req.users.find(u => u.id === id);
 
         if(user) {
             let habit = user.habits.find(h => h.text === text);
 
             if(habit) {
-                habit.check = status;
+                habit.check = true;
+                habit.streak++;
 
-                res.status(200).json(user);
+                saveUsers(req.users);
+
+                res.status(200).json(user.habits);
             } else {
                 res.status(400).json({ error: "No such habit" });
             }
@@ -64,6 +67,9 @@ router.delete("/delete", (req, res) => {
 
             if (habitIndex !== -1) {
                 req.users[userIndex].habits.splice(habitIndex, 1);
+
+                saveUsers(req.users);
+
                 res.status(200).json(req.users[userIndex].habits);
             } else {
                 res.status(400).json({ error: "No such habit for the user" });
@@ -75,5 +81,14 @@ router.delete("/delete", (req, res) => {
         res.status(400).json({ error: "Bad Request" });
     }
 })
+
+function saveUsers(users) {
+    fs.writeFileSync(path.join(__dirname, "../users.json"), JSON.stringify(users), (err) => {
+        if(err) {
+            console.log("Error: ", err);
+            return res.status(400).json({ error: "Something went wrong" });
+        }
+    });
+}
 
 module.exports = router;

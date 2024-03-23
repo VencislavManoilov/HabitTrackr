@@ -26,7 +26,7 @@ router.post("/signin", (req, res) => {
             return res.status(400).json({ error: "Password must contain at least 8 characters, including at least one number, one uppercase letter and one lowercase letter." });
         }
 
-        const newUser = { id: id, name: name, email: email, password: password };
+        const newUser = { id: id, name: name, email: email, password: password, habits: [] };
         req.users.push(newUser);
         saveUsers(req.users);
 
@@ -76,6 +76,11 @@ router.post("/session", (req, res) => {
         return res.status(400).json({ error: "Session not found" });
     }
 })
+
+router.get("/logout", (req, res) => {
+    req.session.destroy();
+    res.status(200).json({ success: true });
+});
 
 function saveUsers(users) {
     fs.writeFileSync(path.join(__dirname, "../users.json"), JSON.stringify(users), (err) => {

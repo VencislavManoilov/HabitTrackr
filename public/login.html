@@ -52,7 +52,7 @@
                     document.getElementById("error").innerHTML = response.error;
                 } else if(response.success) {
                     setCookie("session", response.session, 1);
-                    document.location.href = "./dashboard.html";
+                    document.location.href = "/home";
                 }
                 return response;
             })

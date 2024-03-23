@@ -41,13 +41,21 @@ app.use((req, res, next) => {
 })
 
 const habits = require("./routes/habits");
-app.use("/habits", habits);
+app.use("/habit", habits);
 
 const auth = require("./routes/auth");
 app.use("/auth", auth);
 
 app.get("/", (req, res) => {
     res.status(200).send(path.join(__dirname, "public", "index.html"));
+})
+
+app.get("/home", (req, res) => {
+    if(req.session.user) {
+        res.status(200).sendFile(path.join(__dirname, "public", "home.html"));
+    } else {
+        res.redirect("/");
+    }
 })
 
 app.get("/test", (req, res) => {

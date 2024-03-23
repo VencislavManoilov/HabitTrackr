@@ -39,9 +39,10 @@
             .then((resp) => resp.json())
             .then(function(response) {
                 if(response.error) {
-                    document.getElementById("error").innerHTML = response.error;
+                    deleteCookie("session");
+                    document.location.href = "/";
                 } else if(response.success) {
-                    document.getElementById("error").innerHTML = "Done";
+                    document.location.href = "/home";
                 }
 
                 return response;

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Home</title>
+
+    <link rel="stylesheet" type="text/css" href="./main.css"> 
+    <link rel="stylesheet" type="text/css" href="./css/home.css"> 
+</head>
+
+<body onload="init()">
+    <p id="error" style="display: none;"></p>
+
+    <p id="welcome"></p>
+
+    <button onclick="logout()">Logout</button>
+
+    <div id="habits"></div>
+
+    <div id="add">
+        <input id="habit-text" type="text" placeholder="Type a habit">
+        <input id="goal" type="number" min="1" value="17">
+        <button onclick="addHabit()">Add</button>
+    </div>
+</body>
+
+<script src="./cookies.js"></script>
+
+<script>
+    const xhr = new XMLHttpRequest();
+    let user = {};
+
+    function init() {
+        xhr.open("GET", "/user", true);
+        xhr.send();
+        xhr.onload = () => {
+            if(xhr.status === 200) {
+                user = JSON.parse(xhr.response);
+                formData(user);
+            } else if(xhr.status === 400 || xhr.response.error) {
+                let error = document.getElementById("error");
+                error.style.display = "inline";
+                error.innerHTML = xhr.response.error;
+            }
+        }
+    }
+
+    function formData(data) {
+        document.getElementById("welcome").innerHTML = "Hello " + data.name;
+        document.getElementById("habits").innerHTML = "";
+
+        for(let i = 0; i < data.habits.length; i++) {
+            document.getElementById("habits").innerHTML += 
+            `
+            <div class='habit'>
+                <input type="checkbox" onclick="check('${data.habits[i].text}')" ${data.habits[i].check ? 'checked' : ''} ${data.habits[i].check ? 'disabled' : ''}>
+                <span>${data.habits[i].text}</span>
+                <span>${data.habits[i].streak}/${data.habits[i].goal}</span>
+                <button onclick="deleteHabit('${data.habits[i].text}')">Delete</button>
+            </div>
+            `
+        }
+    }
+
+    function addHabit() {
+        const text = document.getElementById("habit-text").value;
+        const goal = document.getElementById("goal").value;
+        
+        if(text && goal) {
+            fetch("/habit/create", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8', },
+                body: new URLSearchParams({
+                    id: user.id,
+                    text: text,
+                    when: 1,
+                    goal: goal
+                })
+            })
+            .then((resp) => resp.json())
+            .then(function(response) {
+                if(response.error) {
+                    document.getElementById("error").innerHTML = response.error;
+                } else {
+                    user.habits = response;
+
+                    document.getElementById("habit-text").value = "";
+
+                    formData(user);
+                }
+                return response;
+            })
+        }
+    }
+
+    function check(text) {
+        fetch("/habit/check", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8', },
+            body: new URLSearchParams({
+                id: user.id,
+                text: text,
+            })
+        })
+        .then((resp) => resp.json())
+        .then(function(response) {
+            if(response.error) {
+                document.getElementById("error").innerHTML = response.error;
+            } else {
+                user.habits = response;
+                formData(user);
+            }
+            return response;
+        })
+    }
+
+    function deleteHabit(text) {
+        fetch("/habit/delete", {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8', },
+            body: new URLSearchParams({
+                id: user.id,
+                text: text,
+            })
+        })
+        .then((resp) => resp.json())
+        .then(function(response) {
+            if(response.error) {
+                let error = document.getElementById("error");
+                error.style.display = "inline";
+                error.innerHTML = response.error;
+            } else {
+                user.habits = response;
+                formData(user);
+            }
+            return response;
+        })
+    }
+
+    function logout() {
+        xhr.open("GET", "/auth/logout");
+        xhr.send();
+        xhr.onload = () => {
+            const response = JSON.parse(xhr.response);
+
+            if(response.success) {
+                deleteCookie("session");
+                document.location.href = "/";
+            }
+        }
+    }
+</script>
+
+</html>
