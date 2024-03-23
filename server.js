@@ -3,6 +3,36 @@ const app = express();
 const path = require("path");
 const PORT = 3000;
 
+app.use(express.static("public"));
+
+class Habit {
+    constructor(text, howOften) {
+        this.text = text;
+        this.howOften = howOften;
+        this.checkedForToday = false;
+        this.graph = [];
+    }
+
+    Check() {
+        this.checkedForToday = true;
+    }
+}
+
+let users = [
+    {id: "1", name: "Pesho", habits: []},
+    {id: "2", name: "Gosho", habits: []},
+    {id: "3", name: "Marto", habits: []},
+];
+
+app.use((req, res, next) => {
+    req.Habit = Habit;
+    req.users = users;
+    next();
+})
+
+const habits = require("./routes/habits");
+app.use("/habits", habits);
+
 app.get("/", (req, res) => {
     res.redirect("/test");
 })
