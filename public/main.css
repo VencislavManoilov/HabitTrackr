@@ -1,0 +1,25 @@
+body, html {
+    background-color: #37474F;
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+	line-height: 1.5;
+}
+
+#error {
+    color: red;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    font-weight: 700;
+    color: rgb(172, 255, 207);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: rgb(72, 197, 124);
+}

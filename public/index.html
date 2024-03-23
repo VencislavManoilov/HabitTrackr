@@ -1,11 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="./main.css">
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+
     <title>HabitTrackr</title>
 </head>
-<body>
-    <p>Welcome to HabitTrackr</p>
+
+<body onload="init()">
+    <p id="error"></p>
+
+    <p id="header">Welcome to <span>Habit</span>Trackr</p>
+
+    <div id="auth" style="display: none;">
+        <a href="404.html">Sigin in</a>
+        <a href="404.html">Login</a>
+    </div>
 </body>
+
+<script src="cookies.js"></script>
+
+<script>
+    function init() {
+        const session = getCookie("session");
+
+        if(session !== "") {
+            fetch("/auth/session", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8', },
+                body: new URLSearchParams({
+                    session: session
+                })
+            })
+            .then((resp) => resp.json())
+            .then(function(response) {
+                if(response.error) {
+                    document.getElementById("error").innerHTML = response.error;
+                } else if(response.success) {
+                    document.getElementById("error").innerHTML = "Done";
+                }
+
+                return response;
+            })
+        } else {
+            document.getElementById("auth").style.display = "grid";
+        }
+    }
+</script>
+
 </html>
