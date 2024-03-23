@@ -9,23 +9,21 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 class Habit {
-    constructor(text, howOften) {
+    constructor(text, when, goal) {
         this.text = text;
-        this.howOften = howOften;
+        this.when = when;
         this.check = false;
-        this.graph = [];
+        this.streak = 0;
+        this.goal = goal;
     }
 
     Check() {
         this.check = true;
+        this.streak++;
     }
 }
 
-let users = [
-    {id: "1", name: "Pesho", habits: []},
-    {id: "2", name: "Gosho", habits: []},
-    {id: "3", name: "Marto", habits: []},
-];
+let users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
 
 app.use((req, res, next) => {
     req.Habit = Habit;
@@ -37,7 +35,7 @@ const habits = require("./routes/habits");
 app.use("/habits", habits);
 
 app.get("/", (req, res) => {
-    res.redirect("/test");
+    res.status(200).send(path.join(__dirname, "public", "index.html"));
 })
 
 app.get("/test", (req, res) => {
