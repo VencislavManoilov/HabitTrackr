@@ -1,0 +1,1 @@
+"HabitTrackr is a straightforward application designed to help users build and maintain positive habits in their daily lives. The app focuses on simplicity and effectiveness, making it easy for users to track their progress and stay motivated." 
