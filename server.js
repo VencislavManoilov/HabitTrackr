@@ -1,20 +1,23 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const bodyParser = require('body-parser');
+const fs = require("fs");
 const PORT = 3000;
 
 app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 class Habit {
     constructor(text, howOften) {
         this.text = text;
         this.howOften = howOften;
-        this.checkedForToday = false;
+        this.check = false;
         this.graph = [];
     }
 
     Check() {
-        this.checkedForToday = true;
+        this.check = true;
     }
 }
 
