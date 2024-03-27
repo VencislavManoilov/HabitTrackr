@@ -27,6 +27,7 @@ class Habit {
     Check() {
         this.check = true;
         this.streak++;
+        this.dayChecked = new Date().getDay;
     }
 }
 
@@ -59,6 +60,7 @@ app.get("/home", (req, res) => {
 })
 
 app.get("/test", (req, res) => {
+    resetHabits();
     res.status(200).send("Everything is OK!");
 })
 
@@ -74,6 +76,43 @@ app.get("/user", (req, res) => {
         res.redirect("/");
     }
 })
+
+function resetHabits() {
+    users.forEach(user => {
+        user.habits.forEach(habit => {
+            if(habit.check) {
+                habit.check = false;
+            } else {
+                habit.streak = 0;
+            }
+        });
+    });
+
+    fs.writeFileSync(path.join(__dirname, "users.json"), JSON.stringify(users), (err) => {
+        if(err) {
+            console.log(err);
+        }
+    })
+}
+
+function callFunctionAt1AM() {
+    const now = new Date();
+
+    // Calculate the time until 1:00 AM
+    const oneAM = new Date(now);
+    oneAM.setHours(0, 0, 0, 0); // Set to 1:00 AM
+    let timeUntilOneAM = oneAM - now;
+
+    if (timeUntilOneAM < 0) {
+        timeUntilOneAM += 24 * 60 * 60 * 1000; // Add 24 hours
+    }
+
+    setTimeout(function() {
+        resetHabits();
+    }, timeUntilOneAM);
+}
+
+callFunctionAt1AM();
 
 app.use((req, res, next) => {
     res.status(404).sendFile(path.join(__dirname, "public", "404.html"));
