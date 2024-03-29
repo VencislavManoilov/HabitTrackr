@@ -101,15 +101,15 @@ function callFunctionAt1AM() {
     // Calculate the time until 1:00 AM
     const oneAM = new Date(now);
     oneAM.setHours(0, 0, 0, 0); // Set to 1:00 AM
-    let timeUntilOneAM = oneAM - now;
+    let timeLeftToReset = oneAM - now;
 
-    if (timeUntilOneAM < 0) {
-        timeUntilOneAM += 24 * 60 * 60 * 1000; // Add 24 hours
+    if (timeLeftToReset < 0) {
+        timeLeftToReset += 24 * 60 * 60 * 1000; // Add 24 hours
     }
 
     setTimeout(function() {
         resetHabits();
-    }, timeUntilOneAM);
+    }, timeLeftToReset);
 }
 
 callFunctionAt1AM();

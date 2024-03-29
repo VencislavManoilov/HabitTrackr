@@ -1,22 +1,38 @@
+#navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.267);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
 #title {
-    text-align: center;
-    border-bottom: 5px solid pink;
-    margin-right: 10%;
-    margin-left: 10%;
-    font-size: 3em;
-    margin-top: 0;
-    cursor: pointer;
+    font-size: 2.2em;
+    margin: 0;
+    margin-left: 15px;
 }
 
 #title span {
-    color: aquamarine;
+    color: #00f5d4;
     font-size: 1.15em;
+}
+
+#navbar a {
+    font-size: 1.5em;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 15px;
 }
 
 #header {
     font-size: 2em;
     margin-bottom: 15px;
-    color: aquamarine;
+    color: #00f5d4;
     font-weight: 700;
 }
 
@@ -24,28 +40,42 @@
     display: flex;
     flex-direction: column;
     justify-content: start;
-    width: 500px;
+    width: 400px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
+#auth form {
+    display: flex;
+    flex-direction: column;
+}
+
+#auth form label {
+    text-align: left;
+}
+
 #auth form input {
-    margin-bottom: 15px;
+    /* margin-bottom: 15px; */
+    width: 100%;
+}
+
+#auth form button {
+    width: fit-content;
 }
 
 input {
 	appearance: none;
-    width: 60%;
+    width: 70%;
     font-weight: 600;
-	border: none;
 	outline: none;
-	border-bottom: .2em solid #005964;
-	background: none;
+	background-color: rgba(255, 255, 255, 0.267);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
 	border-radius: .2em .2em 0 0;
 	padding: .4em;
-	color: #759aff;
+	color: #000000;
 }
 
 #links {
