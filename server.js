@@ -33,6 +33,7 @@ class Habit {
 
 let users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
 let sessions = JSON.parse(fs.readFileSync('sessions.json', 'utf8'));
+const quotes = JSON.parse(fs.readFileSync('quotes.json', 'utf8')).quotes;
 
 app.use((req, res, next) => {
     req.Habit = Habit;
@@ -75,6 +76,10 @@ app.get("/user", (req, res) => {
     } else {
         res.redirect("/");
     }
+})
+
+app.get("/quote", (req, res) => {
+    res.status(200).json(quotes[random(0, quotes.length)]);
 })
 
 function resetHabits() {
@@ -121,3 +126,7 @@ app.use((req, res, next) => {
 app.listen(PORT, () => {
     console.log("Listening: " + PORT);
 })
+
+function random(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}

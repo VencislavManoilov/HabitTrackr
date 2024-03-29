@@ -25,13 +25,15 @@
     </div>
 
     <div id="content">
-        
+        <div id="quote"></div>
     </div>
 </body>
 
 <script src="cookies.js"></script>
 
 <script>
+    const xhr = new XMLHttpRequest();
+
     function init() {
         const session = getCookie("session");
 
@@ -56,6 +58,14 @@
             })
         } else {
             document.getElementById("auth").style.display = "flex";
+        }
+
+        xhr.open("GET", "/quote", true);
+        xhr.send();
+        xhr.onload = () => {
+            const data = JSON.parse(xhr.response);
+            document.getElementById("quote").innerHTML += "<p>" + data.quote + "</p";
+            document.getElementById("quote").innerHTML += "<p>" + data.author + "</p";
         }
     }
 </script>

@@ -37,3 +37,9 @@
     margin-top: auto;
     margin-bottom: auto;
 }
+
+#content {
+    position: absolute;
+    margin-top: 4em;
+    display: flex;
+}
