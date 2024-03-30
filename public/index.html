@@ -26,6 +26,11 @@
 
     <div id="content">
         <div id="quote"></div>
+
+        <div id="about">
+            <p class="header">About</p>
+            <p class="text">Hello there! This is something I need to type so I can test the program behavior.</p>
+        </div>
     </div>
 </body>
 
@@ -65,7 +70,7 @@
         xhr.onload = () => {
             const data = JSON.parse(xhr.response);
             document.getElementById("quote").innerHTML += "<p>" + data.quote + "</p";
-            document.getElementById("quote").innerHTML += "<p>" + data.author + "</p";
+            document.getElementById("quote").innerHTML += "<p id='author'>- " + data.author + "</p";
         }
     }
 </script>
