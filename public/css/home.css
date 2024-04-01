@@ -1,0 +1,21 @@
+
+
+#habits {
+    width: 700px;
+}
+
+.habit {
+    width: 700px;
+}
+
+.habit span {
+    width: 400px;
+    word-wrap: break-word;
+}
+
+#days {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 10px;
+}

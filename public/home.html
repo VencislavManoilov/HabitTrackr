@@ -58,18 +58,23 @@
 
     function formData(data) {
         document.getElementById("welcome").innerHTML = "Hello " + data.name;
-        document.getElementById("habits").innerHTML = "";
+        document.getElementById("habits").innerHTML = "<div id='days'><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>";
 
         for(let i = 0; i < data.habits.length; i++) {
             document.getElementById("habits").innerHTML += 
             `
             <div class='habit'>
-                <input type="checkbox" onclick="check('${data.habits[i].text}')" ${data.habits[i].check ? 'checked' : ''} ${data.habits[i].check ? 'disabled' : ''}>
-                <span>${data.habits[i].text}</span>
-                <span>${data.habits[i].streak}/${data.habits[i].goal}</span>
-                <button onclick="deleteHabit('${data.habits[i].text}')">Delete</button>
+                <div class='text'>
+                    <input type="checkbox" onclick="check('${data.habits[i].text}')" ${data.habits[i].check ? 'checked' : ''} ${data.habits[i].check ? 'disabled' : ''}>
+                    <span>${data.habits[i].text}</span>
+                    <button onclick="deleteHabit('${data.habits[i].text}')">Delete</button>
+                </div>
             </div>
             `
+                // <div class='days'>
+                    
+                // </div>
+            // <span>${data.habits[i].streak}/${data.habits[i].goal}</span>
         }
     }
 

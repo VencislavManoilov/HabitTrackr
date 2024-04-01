@@ -20,13 +20,20 @@ class Habit {
         this.text = text;
         this.when = when;
         this.check = false;
+        this.checks = 0;
         this.streak = 0;
+        this.maxStreak = 0;
         this.goal = goal;
+        this.graph = [];
     }
 
     Check() {
         this.check = true;
+        this.checks++;
         this.streak++;
+        if(this.streak >= this.maxStreak) {
+            this.maxStreak = this.streak;
+        }
         this.dayChecked = new Date().getDay;
     }
 }
@@ -85,6 +92,8 @@ app.get("/quote", (req, res) => {
 function resetHabits() {
     users.forEach(user => {
         user.habits.forEach(habit => {
+            habit.graph.push(habit.check);
+            
             if(habit.check) {
                 habit.check = false;
             } else {
