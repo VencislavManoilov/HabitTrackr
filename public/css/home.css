@@ -6,11 +6,34 @@
 
 .habit {
     width: 700px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
 }
 
-.habit span {
+.text {
     width: 400px;
-    word-wrap: break-word;
+}
+
+.days {
+    width: 300px;
+    scrollbar-width: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 25px;
+}
+
+.yes {
+    color: green;
+}
+
+.no {
+    color: red;
+}
+
+.idk {
+    color: grey;
 }
 
 #days {

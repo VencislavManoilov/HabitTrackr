@@ -58,9 +58,20 @@
 
     function formData(data) {
         document.getElementById("welcome").innerHTML = "Hello " + data.name;
-        document.getElementById("habits").innerHTML = "<div id='days'><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>";
+        document.getElementById("habits").innerHTML = "";
 
         for(let i = 0; i < data.habits.length; i++) {
+            let days = "", num = 0;
+
+            if(data.habits[i].graph.length > 7) {
+                num = data.habits[i].graph.length - 7;
+            }
+
+            for(let j = data.habits[i].graph.length; j > num; j--) {
+                days += data.habits[i].graph[j] ? "<span class='yes'>✔</span>" : "<span class='no'>✘</span>";
+                
+            }
+
             document.getElementById("habits").innerHTML += 
             `
             <div class='habit'>
@@ -69,11 +80,11 @@
                     <span>${data.habits[i].text}</span>
                     <button onclick="deleteHabit('${data.habits[i].text}')">Delete</button>
                 </div>
+                <div class='days'>
+                    ${days}
+                </div>
             </div>
             `
-                // <div class='days'>
-                    
-                // </div>
             // <span>${data.habits[i].streak}/${data.habits[i].goal}</span>
         }
     }
