@@ -1,5 +1,3 @@
-
-
 #habits {
     width: 700px;
 }
@@ -9,6 +7,11 @@
     display: flex;
     flex-direction: row;
     justify-content: start;
+    border-top: 2px solid black;
+}
+
+.habit:last-child {
+    border-bottom: 2px solid black;
 }
 
 .text {
@@ -21,7 +24,13 @@
     display: flex;
     flex-direction: row;
     justify-content: end;
+    align-items: center;
     gap: 25px;
+}
+
+.yes, .no, .idk {
+    width: 15px;
+    text-align: center;
 }
 
 .yes {
@@ -33,7 +42,8 @@
 }
 
 .idk {
-    color: grey;
+    color: rgb(75, 75, 75);
+    font-weight: 700;
 }
 
 #days {
