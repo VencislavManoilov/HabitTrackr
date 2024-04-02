@@ -1,13 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+
+#navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: none;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.267);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+#navbar span {
+    color: #00f5d4;
+    font-size: 1.15em;
+}
+
+#navbar p {
+    font-size: 2.3em;
+    margin: 0;
+    margin-left: 15px;
+}
+
+#logout {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-left: 17px;
+    margin-bottom: 10px;
+    color: rgb(255, 82, 82);
+}
+
+#logout:hover {
+    color: rgb(255, 0, 0);
+    filter: drop-shadow(2px 2px 1px black);
+    margin-bottom: 12px;
+    margin-left: 15px;
+}
+
+#all {
+    width: 700px;
+    /* height: calc(100vh - 63px); */
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    /* margin-top: 63px; */
+    padding-left: 25px;
+    padding-right: 25px;
+    background-color: rgba(0, 0, 0, 0.342);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+#welcome {
+    font-family: "Caveat", cursive;
+    font-size: 2em;
+    margin-bottom: 10px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.692);
+    border-radius: 15px;
+}
+
 #habits {
     width: 700px;
+    align-items: center;
 }
 
 .habit {
     width: 700px;
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: end;
     border-top: 2px solid black;
+    min-height: 50px;
+    align-items: center;
 }
 
 .habit:last-child {
@@ -29,16 +100,20 @@
 }
 
 .yes, .no, .idk {
-    width: 15px;
+    width: 24px;
     text-align: center;
 }
 
+.yes .no {
+    text-shadow: 1px 1px 1px black;
+}
+
 .yes {
-    color: green;
+    color: #00f5d4;
 }
 
 .no {
-    color: red;
+    color: #f15bb5;
 }
 
 .idk {
@@ -50,5 +125,65 @@
     display: flex;
     flex-direction: row;
     justify-content: end;
-    gap: 10px;
+    gap: 15px;
+}
+
+#days span {
+    width: 30px;
+    text-align: center;
+}
+
+#add {
+    width: 700px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+#add input:first-child {
+    width: 82%;
+}
+
+#add input {
+    width: 5%;
+}
+
+#add button {
+    width: 9%;
+}
+
+#preset p:first-child{
+    font-size: 2em;
+    margin-bottom: 0;
+    font-family: "Caveat", cursive;
+}
+
+#preset p {
+    margin: 0;
+    margin-bottom: 4px;
+    text-shadow: 2px 2px 3px rgb(0, 0, 0);
+}
+
+#preset button {
+    margin-bottom: 15px;
+}
+
+.good {
+    border: 1px solid black;
+    border-radius: 20px;
+    background: none;
+    color: #00f5d4;
+    font-weight: 700;
+    font-size: 1em;
+    margin-right: 16px;
+    padding: 3px 10px;
+}
+
+.good:hover {
+    filter: drop-shadow(2px 2px 1px black);
+    transform: translate(-2px, -2px);
+}
+
+.bad {
+    color: #f15bb5;
+    font-weight: 700;
 }
