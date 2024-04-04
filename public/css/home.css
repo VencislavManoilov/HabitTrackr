@@ -79,10 +79,16 @@
     border-top: 2px solid black;
     min-height: 50px;
     align-items: center;
+    transition: 0.25s;
 }
 
 .habit:last-child {
     border-bottom: 2px solid black;
+}
+
+.habit:hover {
+    background-color: rgba(0, 0, 0, 0.267);
+    cursor: pointer;
 }
 
 .text {

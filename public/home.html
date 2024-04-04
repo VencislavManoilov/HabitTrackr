@@ -79,8 +79,31 @@
             }
         }
 
+        checkboxes = {};
+
         for(let i = 0; i < data.habits.length; i++) {
             let days = "", num = 0, addUn = "";
+
+            const habitDiv = document.createElement('div');
+            habitDiv.classList.add('habit');
+
+            const textDiv = document.createElement('div');
+            textDiv.classList.add('text');
+
+            const checkboxInput = document.createElement('input');
+            checkboxInput.type = 'checkbox';
+            checkboxInput.id = data.habits[i].id;
+            checkboxInput.checked = data.habits[i].check;
+            textDiv.appendChild(checkboxInput);
+
+            const textSpan = document.createElement('span');
+            textSpan.textContent = data.habits[i].text;
+            textDiv.appendChild(textSpan);
+
+            habitDiv.appendChild(textDiv);
+
+            const daysDiv = document.createElement('div');
+            daysDiv.classList.add('days');
 
             if(data.habits[i].graph.length > 7) {
                 num = data.habits[i].graph.length - 8;
@@ -101,32 +124,26 @@
                 days += data.habits[i].graph[j] ? "<span class='yes'>✔</span>" : "<span class='no'>✘</span>";
             }
 
-            document.getElementById("habits").innerHTML += 
-            `
-            <div class='habit'>
-                <div class='text'>
-                    <input type="checkbox" id="${data.habits[i].id}" ${data.habits[i].check ? 'checked' : ''}>
-                    <span>${data.habits[i].text}</span>
-                    </div>
-                    <div class='days'>
-                        ${days}
-                    </div>
-            </div>
-            `
+            daysDiv.innerHTML = days;
 
-            let input = document.getElementById(data.habits[i].id);
+            habitDiv.appendChild(daysDiv);
+            document.getElementById("habits").appendChild(habitDiv);
 
-            input.addEventListener("input", () => {
-                if(input.checked) {
-                    check(data.habits[i].id);
-                } else {
-                    uncheck(data.habits[i].id);
-                }
-            })
-
-            // <button onclick="deleteHabit('${data.habits[i].text}')">Delete</button>
-            // <span>${data.habits[i].streak}/${data.habits[i].goal}</span>
+            checkboxes[data.habits[i].id] = checkboxInput;
+            addEventListenerToCheckbox(data.habits[i].id);
         }
+    }
+
+    let checkboxes = {};
+
+    function addEventListenerToCheckbox(id) {
+        checkboxes[id].addEventListener("input", () => {
+            if(checkboxes[id].checked) {
+                check(id);
+            } else {
+                uncheck(id);
+            }
+        });
     }
 
     function addHabit() {
@@ -254,9 +271,13 @@
         for(let i = 0; i < habits.length; i++) {
             presetObj.innerHTML += "<p class='bad'>" + habits[i].bad + ":</p>";
             for(let j = 0; j < habits[i].good.length; j++) {
-                presetObj.innerHTML += "<button class='good'>" + habits[i].good[j] + "</button>";
+                presetObj.innerHTML += `<button class='good' onclick='setHabitTextValue("${habits[i].good[j]}")'>` + habits[i].good[j] + "</button>";
             }
         }
+    }
+
+    function setHabitTextValue(text) {
+        document.getElementById("habit-text").value = text;
     }
 </script>
 
