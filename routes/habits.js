@@ -39,8 +39,7 @@ router.post("/check", (req, res) => {
             let habit = user.habits.find(h => h.text === text);
 
             if(habit) {
-                habit.check = true;
-                habit.streak++;
+                habit.Check();
 
                 saveUsers(req.users);
 
@@ -53,6 +52,32 @@ router.post("/check", (req, res) => {
         }
     } else {
         res.status(400).json({ error: "Bad Request" });
+    }
+})
+
+router.post("/uncheck", (req, res) => {
+    const {id, text} = req.body;
+
+    if(id && text) {
+        let user = req.users.find(u => u.id === id);
+
+        if(user) {
+            let habit = user.habits.find(h => h.text === text);
+
+            if(habit) {
+                habit.Uncheck();
+
+                saveUsers(req.users);
+
+                res.status(200).json(user.habits);
+            } else {
+                req.status(400).json({ error: "No such habit" });
+            }
+        } else {
+            req.status(400).json({ error: "No such user" });
+        }
+    } else {
+        req.status(400).json({ error: "Bad Request" });
     }
 })
 

@@ -36,6 +36,17 @@ class Habit {
         }
         this.dayChecked = new Date().getDay;
     }
+
+    Uncheck() {
+        this.check = false;
+        this.checks--;
+        
+        if(this.streak >= this.maxStreak) {
+            this.maxStreak--;
+        }
+
+        this.streak--;
+    }
 }
 
 let users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
