@@ -105,7 +105,7 @@
             `
             <div class='habit'>
                 <div class='text'>
-                    <input type="checkbox" onclick="check('${data.habits[i].text}')" ${data.habits[i].check ? 'checked' : ''} ${data.habits[i].check ? 'disabled' : ''}>
+                    <input type="checkbox" id="${data.habits[i].id}" ${data.habits[i].check ? 'checked' : ''}>
                     <span>${data.habits[i].text}</span>
                     </div>
                     <div class='days'>
@@ -113,6 +113,17 @@
                     </div>
             </div>
             `
+
+            let input = document.getElementById(data.habits[i].id);
+
+            input.addEventListener("input", () => {
+                if(input.checked) {
+                    check(data.habits[i].id);
+                } else {
+                    uncheck(data.habits[i].id);
+                }
+            })
+
             // <button onclick="deleteHabit('${data.habits[i].text}')">Delete</button>
             // <span>${data.habits[i].streak}/${data.habits[i].goal}</span>
         }
@@ -149,13 +160,13 @@
         }
     }
 
-    function check(text) {
+    function check(id) {
         fetch("/habit/check", {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8', },
             body: new URLSearchParams({
                 id: user.id,
-                text: text,
+                habitId: id,
             })
         })
         .then((resp) => resp.json())
@@ -170,13 +181,34 @@
         })
     }
 
-    function deleteHabit(text) {
+    function uncheck(id) {
+        fetch("/habit/uncheck", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8', },
+            body: new URLSearchParams({
+                id: user.id,
+                habitId: id,
+            })
+        })
+        .then((resp) => resp.json())
+        .then(function(response) {
+            if(response.error) {
+                document.getElementById("error").innerHTML = response.error;
+            } else {
+                user.habits = response;
+                formData(user);
+            }
+            return response;
+        })
+    }
+
+    function deleteHabit(id) {
         fetch("/habit/delete", {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8', },
             body: new URLSearchParams({
                 id: user.id,
-                text: text,
+                habitId: id,
             })
         })
         .then((resp) => resp.json())

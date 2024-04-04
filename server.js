@@ -4,6 +4,7 @@ const session = require("express-session");
 const path = require("path");
 const bodyParser = require('body-parser');
 const fs = require("fs");
+const { v4: uuidv4 } = require('uuid');
 const PORT = 3000;
 
 app.use(express.static("public"));
@@ -17,6 +18,7 @@ app.use(session({
 
 class Habit {
     constructor(text, when, goal) {
+        this.id = uuidv4();
         this.text = text;
         this.when = when;
         this.check = false;
@@ -25,27 +27,7 @@ class Habit {
         this.maxStreak = 0;
         this.goal = goal;
         this.graph = [];
-    }
-
-    Check() {
-        this.check = true;
-        this.checks++;
-        this.streak++;
-        if(this.streak >= this.maxStreak) {
-            this.maxStreak = this.streak;
-        }
-        this.dayChecked = new Date().getDay;
-    }
-
-    Uncheck() {
-        this.check = false;
-        this.checks--;
-        
-        if(this.streak >= this.maxStreak) {
-            this.maxStreak--;
-        }
-
-        this.streak--;
+        this.dayChecked = false;
     }
 }
 

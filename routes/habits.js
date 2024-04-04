@@ -30,16 +30,56 @@ router.post("/create", (req, res) => {
 })
 
 router.post("/check", (req, res) => {
-    const { id, text } = req.body;
+    const { id, habitId } = req.body;
 
-    if(id && text) {
+    if(id && habitId) {
         let user = req.users.find(u => u.id === id);
 
         if(user) {
-            let habit = user.habits.find(h => h.text === text);
+            let habit = user.habits.find(h => h.id === habitId);
 
             if(habit) {
-                habit.Check();
+                habit.check = true;
+                habit.checks++;
+                habit.streak++;
+                if(habit.streak >= habit.maxStreak) {
+                    habit.maxStreak = habit.streak;
+                }
+                habit.dayChecked = new Date().getDay;
+                
+                saveUsers(req.users);
+                
+                res.status(200).json(user.habits);
+            } else {
+                res.status(400).json({ error: "No such habit" });
+            }
+        } else {
+            res.status(400).json({ error: "No such user" });
+        }
+    } else {
+        res.status(400).json({ error: "Bad Request" });
+    }
+})
+
+router.post("/uncheck", (req, res) => {
+    const {id, habitId} = req.body;
+
+    if(id && habitId) {
+        let user = req.users.find(u => u.id === id);
+
+        if(user) {
+            let habit = user.habits.find(h => h.id === habitId);
+
+            if(habit) {
+                habit.check = false;
+                habit.checks--;
+                
+                if(habit.streak >= habit.maxStreak) {
+                    habit.maxStreak--;
+                }
+
+                habit.streak--;
+                habit.dayChecked = false;
 
                 saveUsers(req.users);
 
@@ -55,40 +95,14 @@ router.post("/check", (req, res) => {
     }
 })
 
-router.post("/uncheck", (req, res) => {
-    const {id, text} = req.body;
-
-    if(id && text) {
-        let user = req.users.find(u => u.id === id);
-
-        if(user) {
-            let habit = user.habits.find(h => h.text === text);
-
-            if(habit) {
-                habit.Uncheck();
-
-                saveUsers(req.users);
-
-                res.status(200).json(user.habits);
-            } else {
-                req.status(400).json({ error: "No such habit" });
-            }
-        } else {
-            req.status(400).json({ error: "No such user" });
-        }
-    } else {
-        req.status(400).json({ error: "Bad Request" });
-    }
-})
-
 router.delete("/delete", (req, res) => {
-    const { id, text } = req.body;
+    const { id, habitId } = req.body;
 
-    if(id && text) {
+    if(id && habitId) {
         let userIndex = req.users.findIndex(u => u.id === id);
 
         if (userIndex !== -1) {
-            let habitIndex = req.users[userIndex].habits.findIndex(h => h.text === text);
+            let habitIndex = req.users[userIndex].habits.findIndex(h => h.habitId === habitId);
 
             if (habitIndex !== -1) {
                 req.users[userIndex].habits.splice(habitIndex, 1);
