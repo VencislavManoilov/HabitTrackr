@@ -86,18 +86,19 @@
 
             const habitDiv = document.createElement('div');
             habitDiv.classList.add('habit');
-
+            
             const textDiv = document.createElement('div');
             textDiv.classList.add('text');
-
+            
             const checkboxInput = document.createElement('input');
             checkboxInput.type = 'checkbox';
             checkboxInput.id = data.habits[i].id;
             checkboxInput.checked = data.habits[i].check;
             textDiv.appendChild(checkboxInput);
-
-            const textSpan = document.createElement('span');
+            
+            const textSpan = document.createElement('a');
             textSpan.textContent = data.habits[i].text;
+            textSpan.href = "/open?id=" + data.habits[i].id;
             textDiv.appendChild(textSpan);
 
             habitDiv.appendChild(textDiv);
@@ -274,6 +275,10 @@
                 presetObj.innerHTML += `<button class='good' onclick='setHabitTextValue("${habits[i].good[j]}")'>` + habits[i].good[j] + "</button>";
             }
         }
+    }
+
+    function open(id) {
+        console.log(id);
     }
 
     function setHabitTextValue(text) {

@@ -1,1 +1,1 @@
-[{"id":"e9edc82b-5b4e-4bd6-b9af-03432ee7ca55","name":"Pesho","email":"pesho@email.com","password":"Pesho123","habits":[]}]
+[{"id":"e9edc82b-5b4e-4bd6-b9af-03432ee7ca55","name":"Pesho","email":"pesho@email.com","password":"Pesho123","habits":[{"id":"c497e566-59c0-4ef7-abb9-a6c252176fc0","text":"Разходка","when":1,"check":false,"checks":0,"streak":0,"maxStreak":0,"goal":"21","graph":[],"dayChecked":false}]}]

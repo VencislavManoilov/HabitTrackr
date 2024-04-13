@@ -45,7 +45,6 @@ router.post("/check", (req, res) => {
                 if(habit.streak >= habit.maxStreak) {
                     habit.maxStreak = habit.streak;
                 }
-                habit.dayChecked = new Date().getDay;
                 
                 saveUsers(req.users);
                 
@@ -118,6 +117,27 @@ router.delete("/delete", (req, res) => {
         }
     } else {
         res.status(400).json({ error: "Bad Request" });
+    }
+})
+
+router.get("/get", (req, res) => {
+    const { id } = req.query;
+    console.log(req.session.user);
+
+    if(req.session.user) {
+        if(id) {
+            const habit = req.users.find(u => u.id == req.session.user.id).habits.find(h => h.id == id);
+
+            if(habit) {
+                res.status(200).json(habit);
+            } else {
+                res.status(400).json({ error: "No such habit" });
+            }
+        } else {
+            res.status(400).json({ error: "No habit id provided!" });
+        }
+    } else {
+        res.status(400).json({ error: "Lost connection" });
     }
 })
 

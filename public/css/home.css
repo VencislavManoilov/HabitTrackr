@@ -88,11 +88,23 @@
 
 .habit:hover {
     background-color: rgba(0, 0, 0, 0.267);
-    cursor: pointer;
 }
 
 .text {
     width: 400px;
+}
+
+.habit .text a {
+    font-weight: 500;
+    color: white;
+    transition: all .3s ease-out;
+    text-decoration-color: #f15bb5;
+}
+
+.habit a:hover {
+    text-decoration-line: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: #00f5d4;
 }
 
 .days {

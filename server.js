@@ -27,7 +27,6 @@ class Habit {
         this.maxStreak = 0;
         this.goal = goal;
         this.graph = [];
-        this.dayChecked = false;
     }
 }
 
@@ -82,10 +81,14 @@ app.get("/quote", (req, res) => {
     res.status(200).json(quotes[random(0, quotes.length)]);
 })
 
+app.get("/open", (req, res) => {
+    res.status(200).sendFile(path.join(__dirname, "public", "habit.html"));
+})
+
 function resetHabits() {
     users.forEach(user => {
         user.habits.forEach(habit => {
-            habit.graph.push(habit.check);
+            habit.graph.push({check: habit.check, day: new Date().toLocaleDateString()});
             
             if(habit.check) {
                 habit.check = false;
@@ -105,9 +108,9 @@ function resetHabits() {
 function callFunctionAt1AM() {
     const now = new Date();
 
-    // Calculate the time until 1:00 AM
+    // Calculate the time until 00:00 AM
     const oneAM = new Date(now);
-    oneAM.setHours(0, 0, 0, 0); // Set to 1:00 AM
+    oneAM.setHours(0, 0, 0, 0); // Set to 00:00 AM
     let timeLeftToReset = oneAM - now;
 
     if (timeLeftToReset < 0) {
