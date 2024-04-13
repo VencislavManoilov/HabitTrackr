@@ -122,7 +122,6 @@ router.delete("/delete", (req, res) => {
 
 router.get("/get", (req, res) => {
     const { id } = req.query;
-    console.log(req.session.user);
 
     if(req.session.user) {
         if(id) {

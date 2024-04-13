@@ -1,0 +1,44 @@
+#contents {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.267);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+#back {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border: none;
+    color: white;
+    font-weight: 500;
+    font-size: 2em;
+    transition: all 0.3s ease;
+}
+
+#back:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#habit {
+    padding: 0;
+    margin: 0;
+    margin-top: 16px;
+    text-align: center;
+    font-size: 1.4em;
+    border-bottom: 4px solid black;
+}
