@@ -122,7 +122,7 @@
             }
 
             for(let j = num + 1; j < data.habits[i].graph.length; j++) {
-                days += data.habits[i].graph[j] ? "<span class='yes'>✔</span>" : "<span class='no'>✘</span>";
+                days += data.habits[i].graph[j].check ? "<span class='yes'>✔</span>" : "<span class='no'>✘</span>";
             }
 
             daysDiv.innerHTML = days;

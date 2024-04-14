@@ -105,7 +105,7 @@ function resetHabits() {
     })
 }
 
-function callFunctionAt1AM() {
+function callFunctionAt0AM() {
     const now = new Date();
 
     // Calculate the time until 00:00 AM
@@ -122,7 +122,7 @@ function callFunctionAt1AM() {
     }, timeLeftToReset);
 }
 
-callFunctionAt1AM();
+callFunctionAt0AM();
 
 app.use((req, res, next) => {
     res.status(404).sendFile(path.join(__dirname, "public", "404.html"));
