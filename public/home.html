@@ -149,7 +149,7 @@
 
     function addHabit() {
         const text = document.getElementById("habit-text").value;
-        const goal = document.getElementById("goal").value;
+        const goal = parseInt(document.getElementById("goal").value);
         
         if(text && goal) {
             fetch("/habit/create", {

@@ -22,6 +22,8 @@
         <p id="habit"></p>
 
         <div id="graph"></div>
+
+        <button onclick="deleteHabit()">Delete</button>
     </div>
 </body>
 
@@ -29,6 +31,7 @@
 
 <script>
     const xhr = new XMLHttpRequest();
+    let habit, user;
 
     function init() {
         const searchParams = new URLSearchParams(window.location.search);
@@ -42,11 +45,46 @@
                     document.location.href = "/home";
                 } else {
                     document.getElementById("habit").innerHTML += data.text;
+                    habit = data;
+
+                    xhr.open("GET", "/user");
+                    xhr.send();
+                    xhr.onload = () => {
+                        user = JSON.parse(xhr.response);
+                    }
                 }
             }
         } else {
             document.location.href = "/home";
         }
+    }
+
+    function deleteHabit() {
+        fetch("/habit/delete", {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+            body: new URLSearchParams({
+                id: user.id,
+                habitId: habit.id
+            })
+        })
+        .then((resp) => {
+            setTimeout(() => {
+                return resp.json()
+                    .then(function(response) {
+                        if (response.error) {
+                            document.getElementById("error").innerHTML = response.error;
+                        } else {
+                            user.habits = response;
+                            document.location.href = "/home";
+                        }
+                        return response;
+                    });
+            }, 300);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     }
 </script>
 

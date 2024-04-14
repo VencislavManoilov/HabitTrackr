@@ -15,7 +15,7 @@ router.post("/create", (req, res) => {
         let user = req.users.find(u => u.id === id);
 
         if(user) {
-            user.habits.push(new req.Habit(text, parseInt(when), goal));
+            user.habits.push(new req.Habit(text, parseInt(when), parseInt(goal)));
 
             saveUsers(req.users);
 
@@ -100,8 +100,9 @@ router.delete("/delete", (req, res) => {
     if(id && habitId) {
         let userIndex = req.users.findIndex(u => u.id === id);
 
+        
         if (userIndex !== -1) {
-            let habitIndex = req.users[userIndex].habits.findIndex(h => h.habitId === habitId);
+            let habitIndex = req.users[userIndex].habits.findIndex(h => h.id === habitId);
 
             if (habitIndex !== -1) {
                 req.users[userIndex].habits.splice(habitIndex, 1);
