@@ -89,7 +89,7 @@
             daysElement.classList.add("day");
             daysElement.classList.add("lastMonth");
             let date = new Date().setDate(firstDayOfTheMonth.getDate() - i);
-            daysElement.innerHTML = "<p>" + new Date(date).getDate() + "</p>";
+            daysElement.innerHTML = "<p>" + new Date(currentDate.getFullYear(), currentDate.getMonth(), firstDayOfTheMonth.getDate() - i).getDate() + "</p>";
             graph.appendChild(daysElement);
         }
 
@@ -97,34 +97,33 @@
             let daysElement = document.createElement("div");
             daysElement.classList.add("day");
             
-            let date = new Date().setDate(firstDayOfTheMonth.getDate() + i);
+            let date = new Date(currentDate.getFullYear(), currentDate.getMonth(), firstDayOfTheMonth.getDate() + i);
 
             for(let j = 0; j < habit.graph.length; j++) {
-                if(new Date(date).getDate() == new Date(habit.graph[j].day).getDate() && new Date(date).getMonth() == new Date(habit.graph[j].day).getMonth()) {
+                if(date.getDate() == new Date(habit.graph[j].day).getDate() && date.getMonth() == new Date(habit.graph[j].day).getMonth()) {
                     daysElement.classList.add(habit.graph[j].check ? "done" : "not-done");
                     j = habit.graph.length;
                 }
             }
 
-            daysElement.innerHTML = "<p>" + new Date(date).getDate() + "</p>";
+            daysElement.innerHTML = "<p>" + date.getDate() + "</p>";
             graph.appendChild(daysElement);
         }
 
-        for(let i = 1; i < lastDayOfTheMonth.getDate() - currentDate.getDate(); i++) {
+        for(let i = 1; i <= lastDayOfTheMonth.getDate() - currentDate.getDate(); i++) {
             let daysElement = document.createElement("div");
             daysElement.classList.add("day");
             daysElement.classList.add("futureThisMonth");
-            let date = new Date().setDate(currentDate.getDate() + i);
-            daysElement.innerHTML = "<p>" + new Date(date).getDate() + "</p>";
+            daysElement.innerHTML = "<p>" + new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + i).getDate() + "</p>";
             graph.appendChild(daysElement);
         }
 
-        for(let i = 0; i < 8 - lastDayOfTheMonth.getDay(); i++) {
+        for(let i = 1; i < 8 - lastDayOfTheMonth.getDay(); i++) {
             let daysElement = document.createElement("div");
             daysElement.classList.add("day");
             daysElement.classList.add("nextMonth");
             let date = new Date().setDate(lastDayOfTheMonth.getDate() + i);
-            daysElement.innerHTML = "<p>" + new Date(date).getDate() + "</p>";
+            daysElement.innerHTML = "<p>" + new Date(currentDate.getFullYear(), currentDate.getMonth(), lastDayOfTheMonth.getDate() + i).getDate() + "</p>";
             graph.appendChild(daysElement);
         }
     }
