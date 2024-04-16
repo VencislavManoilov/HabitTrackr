@@ -84,6 +84,15 @@
 .futureThisMonth {
     background: none;
     border: 2px solid grey;
+    height: 19.5px;
+}
+
+.futureThisMonth p {
+    transform: translate(0px, -1.5px);
+}
+
+.not-done p, .done p {
+    transform: translate(0px, .75px);
 }
 
 .not-done {
