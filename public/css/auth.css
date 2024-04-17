@@ -22,11 +22,26 @@
     font-size: 1.15em;
 }
 
-#navbar a {
-    font-size: 1.5em;
+#home {
+    position: absolute;
+    top: 75px;
+    left: 15px;
+    font-size: 2.15em;
     margin-top: auto;
     margin-bottom: auto;
     margin-right: 15px;
+    background-color: rgba(0, 0, 0, 0.432);
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    text-align: center;
+    align-items: center;
+    transition: all .3s ease;
+}
+
+#home:hover {
+    background-color: #000000a6;
+    color: white;
 }
 
 #header {
@@ -61,10 +76,6 @@
     width: 100%;
 }
 
-#auth form button {
-    width: fit-content;
-}
-
 input {
 	appearance: none;
     width: 70%;
@@ -73,7 +84,7 @@ input {
 	background-color: rgba(255, 255, 255, 0.267);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
-	border-radius: .2em .2em 0 0;
+	border-radius: .5em;
 	padding: .4em;
 	color: #000000;
 }
@@ -82,4 +93,53 @@ input {
     /* font-size: 1.5em; */
     display: flex;
     justify-content: space-between;
+}
+
+.button-51 {
+    background-color: transparent;
+    border: 1px solid #266DB6;
+    box-sizing: border-box;
+    color: #00132C;
+    font-family: "Avenir Next LT W01 Bold",sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    padding: 16px 23px;
+    position: relative;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-51:hover,
+.button-51:active {
+    outline: 0;
+}
+
+.button-51:hover {
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.button-51:before {
+    background-color: #D5EDF6;
+    content: "";
+    height: calc(100% + 3px);
+    position: absolute;
+    right: -7px;
+    top: -9px;
+    transition: background-color 300ms ease-in;
+    width: 100%;
+    z-index: -1;
+}
+
+.button-51:hover:before {
+    background-color: #6DCFF6;
+}
+
+@media (min-width: 768px) {
+    .button-51 {
+        padding: 16px 32px;
+    }
 }
