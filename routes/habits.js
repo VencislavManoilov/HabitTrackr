@@ -78,7 +78,6 @@ router.post("/uncheck", (req, res) => {
                 }
 
                 habit.streak--;
-                habit.dayChecked = false;
 
                 saveUsers(req.users);
 

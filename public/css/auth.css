@@ -95,6 +95,20 @@ input {
     justify-content: space-between;
 }
 
+#auth span {
+    margin-top: 25px;
+    font-size: 1.2em;
+    text-shadow: 0px 0px 3px black;
+}
+
+#auth span a {
+    color: #d0e7ff;
+}
+
+#auth span a:hover {
+    color: #a1cfff;
+}
+
 .button-51 {
     background-color: transparent;
     border: 1px solid #266DB6;
