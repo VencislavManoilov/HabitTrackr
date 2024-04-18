@@ -24,6 +24,8 @@
         <p id="error" style="display: none;"></p>
     
         <p id="welcome"></p>
+
+        <div id="quote"></div>
     
         <div id="habits"></div>
     
@@ -54,6 +56,14 @@
                 let error = document.getElementById("error");
                 error.style.display = "inline";
                 error.innerHTML = xhr.response.error;
+            }
+
+            xhr.open("GET", "/quote", true);
+            xhr.send();
+            xhr.onload = () => {
+                const data = JSON.parse(xhr.response);
+                document.getElementById("quote").innerHTML += "<p>" + data.quote + "</p";
+                document.getElementById("quote").innerHTML += "<p id='author'>- " + data.author + "</p";
             }
         }
 

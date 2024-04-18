@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 
 #navbar {
     position: absolute;
@@ -25,7 +26,7 @@
 }
 
 #logout {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     margin-left: 17px;
@@ -42,14 +43,11 @@
 
 #all {
     width: 700px;
-    /* height: calc(100vh - 63px); */
-    height: 100vh;
     top: 0;
     left: 0;
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    /* margin-top: 63px; */
     padding-left: 25px;
     padding-right: 25px;
     background-color: rgba(0, 0, 0, 0.342);
@@ -204,4 +202,21 @@
 .bad {
     color: #f15bb5;
     font-weight: 700;
+}
+
+#quote {
+    max-width: 600px;
+    background: rgba(255, 0, 0, 0.4);
+    background: linear-gradient(135deg, rgba(255, 0, 0, 0.4) 0%, rgba(0, 21, 255, 0.4) 100%);
+    padding: 16px 15px;
+    border-radius: 15px;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    font-family: "Lora", serif;
+}
+
+#author {
+    text-align: end;
 }
