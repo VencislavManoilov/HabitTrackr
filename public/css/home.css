@@ -50,6 +50,7 @@
     margin-right: auto;
     padding-left: 25px;
     padding-right: 25px;
+    min-height: 100vh;
     background-color: rgba(0, 0, 0, 0.342);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
