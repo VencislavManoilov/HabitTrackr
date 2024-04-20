@@ -7,8 +7,10 @@
 
     <title>Начало</title>
 
-    <link rel="stylesheet" type="text/css" href="./main.css"> 
-    <link rel="stylesheet" type="text/css" href="./css/home.css"> 
+    <link rel="stylesheet" type="text/css" href="./main.css">
+    <link rel="stylesheet" type="text/css" href="./css/home.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 
 <body onload="init()">
@@ -32,7 +34,7 @@
         <div id="add">
             <input id="habit-text" type="text" placeholder="Въведи навик">
             <input title="Дни до изтриването на навика" id="goal" type="number" min="1" value="21">
-            <button onclick="addHabit()">Добави</button>
+            <button onclick="addHabit()"><span class="material-symbols-outlined">send</span></button>
         </div>
 
         <div id="preset"></div>

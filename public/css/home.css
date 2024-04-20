@@ -127,11 +127,11 @@
 }
 
 .yes {
-    color: #00f5d4;
+    color: #5bff29;
 }
 
 .no {
-    color: #f15bb5;
+    color: #ff0000;
 }
 
 .idk {
@@ -158,15 +158,30 @@
 }
 
 #add input:first-child {
-    width: 82%;
+    width: calc(87% - 10px);
+    border-radius: 10px;
+    border: none;
+    padding: 5px;
 }
 
 #add input {
     width: 5%;
+    padding: 5px;
 }
 
 #add button {
-    width: 9%;
+    width: 4%;
+    padding: 0;
+    background: none;
+    border: none;
+    transform: translate(0, 7px) scale(1.25);
+    color: white;
+    transition: all .3s ease;
+}
+
+#add button:hover {
+    transform: translate(0, 7px) scale(1.5);
+    text-shadow: 0 0 4px black;
 }
 
 #preset p:first-child{
@@ -178,11 +193,13 @@
 #preset p {
     margin: 0;
     margin-bottom: 4px;
-    text-shadow: 2px 2px 3px rgb(0, 0, 0);
+    font-weight: 400;
+    text-shadow: 0px 0px 4px rgb(0, 0, 0);
 }
 
 #preset button {
     margin-bottom: 15px;
+    font-weight: 400;
 }
 
 .good {
@@ -205,22 +222,40 @@
     box-shadow: 2px 2px 3px black;
 }
 
+.good:active {
+    transform: translate(0px, 0px);
+    box-shadow: none;
+}
+
 .bad {
     color: #ffffff;
     font-weight: 700;
 }
 
 #quote {
-    max-width: 600px;
-    background: rgba(255, 0, 0, 0.4);
-    background: linear-gradient(135deg, rgba(255, 0, 0, 0.4) 0%, rgba(0, 21, 255, 0.4) 100%);
-    padding: 16px 15px;
-    border-radius: 15px;
-    border: 1px solid black;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 30px;
-    font-family: "Lora", serif;
+    background-color: transparent;
+    border: 2px solid #266DB6;
+    box-sizing: border-box;
+    color: #00132C;
+    font-family: "Avenir Next LT W01 Bold",sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    padding: 16px 23px;
+    margin: 20px 0;
+    position: relative;
+}
+
+#quote:before {
+    background-color: #D5EDF6;
+    content: "";
+    height: calc(100% + 3px);
+    position: absolute;
+    right: -7px;
+    top: -9px;
+    transition: background-color 300ms ease-in;
+    width: 100%;
+    z-index: -1;
 }
 
 #author {
