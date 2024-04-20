@@ -21,15 +21,14 @@
 
         <p id="habit"></p>
 
-        <p id="streak"></p>
-        <p id="maxStreak"></p>
-        <p id="goal"></p>
+        <p id="goal">Цел</p>
 
         <p id="month"></p>
 
-        <div id="days"></div>
-
-        <div id="graph"></div>
+        <div id="asdf">
+            <div id="days"></div>
+            <div id="graph"></div>
+        </div>
 
         <button id="delete" onclick="deleteHabit()">Delete</button>
     </div>
@@ -39,7 +38,7 @@
 
 <script>
     const xhr = new XMLHttpRequest();
-    let habit, user, months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",];
+    let habit, user, months = ["Януари", "Февруари", "Март", "Април", "Май", "Юни", "Юли", "Август", "Септември", "Октомври", "Ноември", "Декември"];
 
     function init() {
         const searchParams = new URLSearchParams(window.location.search);
@@ -69,14 +68,12 @@
 
     function formData(data) {
         document.getElementById("habit").innerHTML = data.text;
-        document.getElementById("streak").innerHTML = "Streak: " + data.streak;
-        document.getElementById("maxStreak").innerHTML = "Max streak: " + data.maxStreak;
-        document.getElementById("goal").innerHTML = "Goal: " + data.goal;
+        document.getElementById("goal").innerHTML = `Цел: ${data.streak}/${data.goal}`;
 
         let graph = document.getElementById("graph");
         graph.innerHTML = "";
 
-        document.getElementById("days").innerHTML = "<span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>";
+        document.getElementById("days").innerHTML = "<span>П</span><span>В</span><span>С</span><span>Ч</span><span>П</span><span>С</span><span>Н</span>";
 
         let currentDate = new Date();
         let firstDayOfTheMonth = new Date((currentDate.getMonth() + 1) + "/1/" + currentDate.getFullYear());
