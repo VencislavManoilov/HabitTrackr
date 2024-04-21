@@ -1,28 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 
-#navbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: none;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: rgba(0, 0, 0, 0.267);
-}
-
-#navbar span {
-    color: #00f5d4;
-    font-size: 1.15em;
-}
-
-#navbar p {
-    font-size: 2.3em;
-    margin: 0;
-    margin-left: 15px;
-}
-
 #logout {
     position: fixed;
     bottom: 0;
@@ -30,6 +8,7 @@
     margin-left: 20px;
     margin-bottom: 10px;
     color: rgb(255, 82, 82);
+    /* transition: all .3s ease; */
 }
 
 #logout:hover {
@@ -49,8 +28,9 @@
     padding-left: 25px;
     padding-right: 25px;
     min-height: 100vh;
-    background-color: rgba(0, 0, 0, 0.342);
+    background-color: rgba(0, 35, 99, 0.342);
     min-height: 100%;
+    z-index: -2;
 }
 
 #welcome {
@@ -58,8 +38,14 @@
     font-size: 2em;
     margin-bottom: 10px;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.692);
+    background-color: rgba(0, 0, 0, 0.418);
     border-radius: 15px;
+    color: white;
+    font-weight: 600;
+}
+
+#welcome span {
+    color: #D5EDF6;
 }
 
 #habits {
@@ -118,10 +104,6 @@
     text-align: center;
 }
 
-.yes .no {
-    text-shadow: 1px 1px 1px black;
-}
-
 .yes {
     color: #5bff29;
 }
@@ -140,6 +122,8 @@
     flex-direction: row;
     justify-content: end;
     gap: 15px;
+    color: white;
+    /* font-weight: 600; */
 }
 
 #days span {
@@ -192,13 +176,14 @@
     font-size: 2em;
     margin-bottom: 0;
     font-family: "Shantell Sans", cursive;
+    color: white;
+    font-weight: 400;
 }
 
 #preset p {
     margin: 0;
     margin-bottom: 4px;
-    font-weight: 400;
-    text-shadow: 0px 0px 4px rgb(0, 0, 0);
+    font-weight: 600;
 }
 
 #preset button {

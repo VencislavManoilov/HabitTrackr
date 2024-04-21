@@ -165,15 +165,15 @@ input {
 }
 
 .signin-button {
-    border: 1px solid #00ad4e;
+    border: 1px solid #00ad0e;
 }
 
 .signin-button:before {
-    background-color: #88ffbe;
+    background-color: #88ff92;
 }
 
 .signin-button:hover:before {
-    background-color: #00e266;
+    background-color: #00e200;
 }
 
 @media (min-width: 768px) {
