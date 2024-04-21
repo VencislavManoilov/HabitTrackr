@@ -7,8 +7,6 @@
     flex-direction: row;
     justify-content: space-between;
     background-color: rgba(0, 0, 0, 0.267);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
 }
 
 #title {
@@ -18,7 +16,7 @@
 }
 
 #title span {
-    color: #00f5d4;
+    color: #266DB6;
     font-size: 1.15em;
 }
 
@@ -39,6 +37,7 @@
     transition: all .3s ease;
 }
 
+
 #home:hover {
     background-color: #000000a6;
     color: white;
@@ -47,8 +46,15 @@
 #header {
     font-size: 2em;
     margin-bottom: 15px;
-    color: #00f5d4;
     font-weight: 700;
+}
+
+.signin {
+    color: #00e266;
+}
+
+.login {
+    color: #238eff;
 }
 
 #auth {
@@ -69,6 +75,7 @@
 
 #auth form label {
     text-align: left;
+    font-weight: 600;
 }
 
 #auth form input {
@@ -82,8 +89,6 @@ input {
     font-weight: 600;
 	outline: none;
 	background-color: rgba(255, 255, 255, 0.267);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
 	border-radius: .5em;
 	padding: .4em;
 	color: #000000;
@@ -98,15 +103,22 @@ input {
 #auth span {
     margin-top: 25px;
     font-size: 1.2em;
-    text-shadow: 0px 0px 3px black;
 }
 
 #auth span a {
-    color: #d0e7ff;
+    color: #71b6ff;
 }
 
 #auth span a:hover {
-    color: #a1cfff;
+    color: #238eff;
+}
+
+#auth span .signin-link {
+    color: #00e266;
+}
+
+#auth span .signin-link:hover {
+    color: #00ad4e;
 }
 
 .button-51 {
@@ -150,6 +162,18 @@ input {
 
 .button-51:hover:before {
     background-color: #6DCFF6;
+}
+
+.signin-button {
+    border: 1px solid #00ad4e;
+}
+
+.signin-button:before {
+    background-color: #88ffbe;
+}
+
+.signin-button:hover:before {
+    background-color: #00e266;
 }
 
 @media (min-width: 768px) {

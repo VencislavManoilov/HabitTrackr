@@ -9,13 +9,13 @@
     flex-direction: row;
     justify-content: space-between;
     background-color: rgba(0, 0, 0, 0.267);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    font-weight: 500;
 }
 
 #header span {
-    color: #00f5d4;
+    color: #266DB6;
     font-size: 1.15em;
+    font-weight: 600;
 }
 
 #header p {
@@ -40,6 +40,10 @@
     margin-bottom: auto;
 }
 
+#login:hover {
+    color: #4ba5ff;
+}
+
 #content {
     position: absolute;
     margin-top: 10em;
@@ -55,16 +59,32 @@
 }
 
 #quote {
+    background-color: transparent;
+    border: 2px solid #266DB6;
+    box-sizing: border-box;
+    color: #00132C;
+    font-family: "Avenir Next LT W01 Bold",sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    padding: 16px 23px;
+    margin: 20px 0;
+    position: relative;
     max-width: 600px;
-    background: rgba(255, 0, 0, 0.4);
-    background: linear-gradient(135deg, rgba(255, 0, 0, 0.4) 0%, rgba(0, 21, 255, 0.4) 100%);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    padding: 16px 15px;
-    border-radius: 15px;
     margin-left: auto;
     margin-right: auto;
-    font-family: "Lora", serif;
+}
+
+#quote:before {
+    background-color: #D5EDF6;
+    content: "";
+    height: calc(100% + 3px);
+    position: absolute;
+    right: -7px;
+    top: -9px;
+    transition: background-color 300ms ease-in;
+    width: 100%;
+    z-index: -1;
 }
 
 #author {
@@ -80,18 +100,19 @@
 .firstStep {
     font-weight: 700;
     font-size: 1.3em;
-    text-shadow: none;
-    text-shadow: 0px 0px 0px black;
+    /* text-shadow: none;
+    text-shadow: 0px 0px 0px black; */
 }
 
 .firstStep a {
-    color: #00f5d4;
+    color: #00e266;
     font-size: 1.15em;
     transition: all .3s ease;
+    text-shadow: 1px 1px 5px black;
 }
 
 .firstStep a:hover {
-    color: #00c4aa;
+    color: #00af4f;
 }
 
 .header {
@@ -102,11 +123,11 @@
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
-    text-shadow: 0px 0px 5px black;
+    /* text-shadow: 0px 0px 5px black; */
     margin-bottom: 0;
 }
 
 .text {
-    text-shadow: 1px 1px 4px black;
+    /* text-shadow: 1px 1px 4px black; */
     font-size: 1.5em;
 }
