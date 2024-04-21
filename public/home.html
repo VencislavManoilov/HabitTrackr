@@ -133,8 +133,16 @@
                 days += addUn;
             }
 
+            let a = document.createElement("div");
+            a.innerHTML = days;
+            console.log(data.habits);
+
             for(let j = num + 1; j < data.habits[i].graph.length; j++) {
-                days += data.habits[i].graph[j].check ? "<span class='yes'>✔</span>" : "<span class='no'>✘</span>";
+                let date = new Date();
+                date.setDate(date.getDate() - 7 + num + 1 + j + a.childElementCount);
+                if(date.getDate() == new Date(data.habits[i].graph[j].day).getDate() && date.getMonth() == new Date(data.habits[i].graph[j].day).getMonth()) {
+                    days += data.habits[i].graph[j].check ? "<span class='yes'>✔</span>" : "<span class='no'>✘</span>";
+                }
             }
 
             daysDiv.innerHTML = days;

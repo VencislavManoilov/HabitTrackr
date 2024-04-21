@@ -88,7 +88,7 @@ app.get("/open", (req, res) => {
 function resetHabits() {
     users.forEach(user => {
         user.habits.forEach(habit => {
-            habit.graph.push({check: habit.check, day: new Date(new Date().setDate(new Date() - 1)).toLocaleDateString()});
+            habit.graph.push({check: habit.check, day: new Date(new Date().setDate(new Date().getDate() - 1)).toLocaleDateString()});
             
             if(habit.check) {
                 habit.check = false;
