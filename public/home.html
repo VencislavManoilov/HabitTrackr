@@ -118,30 +118,19 @@
             const daysDiv = document.createElement('div');
             daysDiv.classList.add('days');
 
-            if(data.habits[i].graph.length > 7) {
-                num = data.habits[i].graph.length - 8;
-            } else if(data.habits[i].graph.length < 7) {
-                num = -1;
-                for(let j = 0; j < 7 - data.habits[i].graph.length; j++) {
-                    addUn += "<span class='idk'>-</span>";
-                } 
-            } else {
-                num = -1;
-            }
+            for(let j = 0; j < 7; j++) {
+                let date = new Date(`${new Date().getMonth() + 1}/${new Date().getDate() - 7 + j}/${new Date().getFullYear()}`);
+                let count = 0;
+                for(let k = 0; k < data.habits[i].graph.length; k++) {
+                    if(date.getDate() == new Date(data.habits[i].graph[k].day).getDate() && date.getMonth() == new Date(data.habits[i].graph[k].day).getMonth()) {
+                        days += data.habits[i].graph[k].check ? "<span class='yes'>✔</span>" : "<span class='no'>✘</span>";
+                        count++;
+                        break;
+                    }
+                }
 
-            if(addUn != "") {
-                days += addUn;
-            }
-
-            let a = document.createElement("div");
-            a.innerHTML = days;
-            console.log(data.habits);
-
-            for(let j = num + 1; j < data.habits[i].graph.length; j++) {
-                let date = new Date();
-                date.setDate(date.getDate() - 7 + num + 1 + j + a.childElementCount);
-                if(date.getDate() == new Date(data.habits[i].graph[j].day).getDate() && date.getMonth() == new Date(data.habits[i].graph[j].day).getMonth()) {
-                    days += data.habits[i].graph[j].check ? "<span class='yes'>✔</span>" : "<span class='no'>✘</span>";
+                if(count == 0) {
+                    days += "<span class='idk'>-</span>";
                 }
             }
 
@@ -295,10 +284,6 @@
                 presetObj.innerHTML += `<button class='good' onclick='setHabitTextValue("${habits[i].good[j]}")'>` + habits[i].good[j] + "</button>";
             }
         }
-    }
-
-    function open(id) {
-        console.log(id);
     }
 
     function setHabitTextValue(text) {
