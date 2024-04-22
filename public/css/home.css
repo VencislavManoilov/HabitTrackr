@@ -53,22 +53,30 @@
     align-items: center;
 }
 
-.habit {
+.habit, .habit-big {
     width: 700px;
     display: flex;
     flex-direction: row;
     justify-content: end;
     border-top: 2px solid black;
     min-height: 50px;
-    align-items: center;
     transition: 0.25s;
+    cursor: pointer;
 }
 
-.habit:last-child {
+.habit {
+    align-items: center;
+}
+
+.habit-big {
+    align-items: baseline;
+}
+
+.habit:last-child, .habit-big:last-child {
     border-bottom: 2px solid black;
 }
 
-.habit:hover {
+.habit:hover, .habit-big:hover {
     background-color: rgba(0, 0, 0, 0.267);
 }
 
@@ -76,17 +84,18 @@
     width: 400px;
 }
 
-.habit .text a {
+.text-big {
+    width: 400px;
+}
+
+.habit-big .text-big {
+    align-items: end;
+}
+
+.habit .text a, .habit-big .text-big a {
     font-weight: 500;
     color: white;
     transition: all .3s ease-out;
-    text-decoration-color: #f15bb5;
-}
-
-.habit a:hover {
-    text-decoration-line: underline;
-    text-decoration-thickness: 2px;
-    text-decoration-color: #00f5d4;
 }
 
 .days {
@@ -129,6 +138,57 @@
 #days span {
     width: 30px;
     text-align: center;
+}
+
+.days-big {
+    width: 300px;
+}
+
+.day-big {
+    content: "";
+    display: inline-block;
+    background-color: rgb(154, 154, 154);
+    border-radius: 15px;
+    margin: 3px 6px;
+    font-size: 15px;
+    padding: 0;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+}
+
+.day-big p {
+    display: grid;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    align-items: center;
+    height: 100%;
+    transform: translate(0, 1px);
+}
+
+.lastMonth, .nextMonth {
+    background-color: rgba(83, 83, 83, 0.579);
+}
+
+.futureThisMonth {
+    background: none;
+    border: 2px solid grey;
+    height: 27px;
+    width: 27px;
+}
+
+.not-done p, .done p {
+    transform: translate(0px, .75px);
+}
+
+.not-done {
+    background-color: red;
+}
+
+.done {
+    background-color: green;
 }
 
 #add {

@@ -40,6 +40,7 @@
 <script>
     const xhr = new XMLHttpRequest();
     let user = {};
+    let size = [];
 
     function init() {
         xhr.open("GET", "/user", true);
@@ -90,8 +91,12 @@
         for(let i = 0; i < data.habits.length; i++) {
             let days = "", num = 0, addUn = "";
 
+            size.push({id: data.habits[i].id, big: false});
+
             const habitDiv = document.createElement('div');
             habitDiv.classList.add('habit');
+            habitDiv.id = data.habits[i].id;
+            habitDiv.onclick = () => {expand(data.habits[i].id)};
             
             const textDiv = document.createElement('div');
             textDiv.classList.add('text');
@@ -104,7 +109,7 @@
             
             const textSpan = document.createElement('a');
             textSpan.textContent = data.habits[i].text;
-            textSpan.href = "/open?id=" + data.habits[i].id;
+            // textSpan.href = "/open?id=" + data.habits[i].id;
             textDiv.appendChild(textSpan);
 
             habitDiv.appendChild(textDiv);
@@ -148,6 +153,118 @@
                 uncheck(id);
             }
         });
+    }
+
+    function expand(id) {
+        xhr.open("GET", "/habit/get?id=" + id, true);
+        xhr.send();
+        xhr.onload = () => {
+            const data = JSON.parse(xhr.response);
+            if(data.error) {
+                document.location.href = "/home";
+            } else {
+                expandHabit(id, !size.find(h => h.id === id).big, data);
+            }
+        }
+    }
+
+    function expandHabit(id, big, data) {
+        if(big) {
+            size.find(h => h.id === id).big = true;
+
+            let currentDate = new Date();
+            let firstDayOfTheMonth = new Date((currentDate.getMonth() + 1) + "/1/" + currentDate.getFullYear());
+            let lastDayOfTheMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+
+            document.getElementById("days").innerHTML = "<span>П</span><span>В</span><span>С</span><span>Ч</span><span>П</span><span>С</span><span>Н</span>"
+
+            document.getElementById(id).classList = ["habit-big"];
+            document.getElementById(id).firstChild.classList = ["text-big"];
+            document.getElementById(id).lastChild.classList = ["days-big"];
+
+            // document.getElementById("month").textContent = months[currentDate.getMonth()];
+
+            let graph = document.getElementById(id).lastChild;
+            graph.innerHTML = "";
+            
+            for(let i = firstDayOfTheMonth.getDay() - 1; i > 0 ; i--) {
+                let daysElement = document.createElement("div");
+                daysElement.classList.add("day-big");
+                daysElement.classList.add("lastMonth");
+                let date = new Date().setDate(firstDayOfTheMonth.getDate() - i);
+                daysElement.innerHTML = "<p>" + new Date(currentDate.getFullYear(), currentDate.getMonth(), firstDayOfTheMonth.getDate() - i).getDate() + "</p>";
+                graph.appendChild(daysElement);
+            }
+
+            for(let i = 0; i < currentDate.getDate(); i++) {
+                let daysElement = document.createElement("div");
+                daysElement.classList.add("day-big");
+                
+                let date = new Date(currentDate.getFullYear(), currentDate.getMonth(), firstDayOfTheMonth.getDate() + i);
+
+                for(let j = 0; j < data.graph.length; j++) {
+                    if(date.getDate() == new Date(data.graph[j].day).getDate() && date.getMonth() == new Date(data.graph[j].day).getMonth()) {
+                        daysElement.classList.add(data.graph[j].check ? "done" : "not-done");
+                        j = data.graph.length;
+                    }
+                }
+
+                daysElement.innerHTML = "<p>" + date.getDate() + "</p>";
+                graph.appendChild(daysElement);
+            }
+
+            for(let i = 1; i <= lastDayOfTheMonth.getDate() - currentDate.getDate(); i++) {
+                let daysElement = document.createElement("div");
+                daysElement.classList.add("day-big");
+                daysElement.classList.add("futureThisMonth");
+                daysElement.innerHTML = "<p>" + new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + i).getDate() + "</p>";
+                graph.appendChild(daysElement);
+            }
+
+            for(let i = 1; i < 8 - lastDayOfTheMonth.getDay(); i++) {
+                let daysElement = document.createElement("div");
+                daysElement.classList.add("day-big");
+                daysElement.classList.add("nextMonth");
+                let date = new Date().setDate(lastDayOfTheMonth.getDate() + i);
+                daysElement.innerHTML = "<p>" + new Date(currentDate.getFullYear(), currentDate.getMonth(), lastDayOfTheMonth.getDate() + i).getDate() + "</p>";
+                graph.appendChild(daysElement);
+            }
+        } else {
+            size.find(h => h.id === id).big = false;
+
+            document.getElementById(id).classList = ["habit"];
+            document.getElementById(id).firstChild.classList = ["text"];
+            document.getElementById(id).lastChild.classList = ["days"];
+
+            let currentDate = new Date();
+            currentDate.setDate(currentDate.getDate() - 7);
+            document.getElementById("days").innerHTML = "";
+            for(let i = 0; i < 7; i++) {
+                let dayElement = document.createElement("span");
+                dayElement.textContent = currentDate.getDate();
+                document.getElementById("days").appendChild(dayElement);
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+
+            let days = "";
+            for(let j = 0; j < 7; j++) {
+                let date = new Date(`${new Date().getMonth() + 1}/${new Date().getDate() - 7 + j}/${new Date().getFullYear()}`);
+                let count = 0;
+                for(let k = 0; k < data.graph.length; k++) {
+                    if(date.getDate() == new Date(data.graph[k].day).getDate() && date.getMonth() == new Date(data.graph[k].day).getMonth()) {
+                        days += data.graph[k].check ? "<span class='yes'>✔</span>" : "<span class='no'>✘</span>";
+                        count++;
+                        break;
+                    }
+                }
+
+                if(count == 0) {
+                    days += "<span class='idk'>-</span>";
+                }
+            }
+            
+            document.getElementById(id).lastChild.innerHTML = days;
+        }
     }
 
     function addHabit() {
