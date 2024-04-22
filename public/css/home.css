@@ -83,7 +83,7 @@
     border-bottom: 2px solid black;
 }
 
-.habit:hover, .habit-big:hover {
+.habit:hover, .habit-big {
     background-color: rgba(0, 0, 0, 0.267);
 }
 
@@ -134,13 +134,20 @@
     font-weight: 700;
 }
 
-#days {
+#days, #days-big {
     display: flex;
     flex-direction: row;
     justify-content: end;
-    gap: 15px;
     color: white;
-    /* font-weight: 600; */
+}
+
+#days {
+    gap: 15px;
+}
+
+#days-big {
+    gap: 30.5px;
+    width: calc(100% - 22px);
 }
 
 #days span {
@@ -182,9 +189,7 @@
 
 .futureThisMonth {
     background: none;
-    border: 2px solid grey;
-    height: 27px;
-    width: 27px;
+    /* border: 2px solid grey; */
 }
 
 .not-done p, .done p {
@@ -192,11 +197,11 @@
 }
 
 .not-done {
-    background-color: red;
+    background-color: rgb(255, 147, 147);
 }
 
 .done {
-    background-color: green;
+    background-color: #92ff92;
 }
 
 #add {

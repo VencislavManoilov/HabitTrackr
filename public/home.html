@@ -173,9 +173,11 @@
             document.getElementById(id).classList = ["habit-big"];
             document.getElementById(id).firstChild.classList = ["text-big"];
             document.getElementById(id).lastChild.classList = ["days-big"];
+            document.getElementById("days").id = "days-big";
 
             let percent = document.createElement("p");
-            percent.innerText = ((data.streak / data.goal) * 100) + "%";
+            // percent.innerText = "Успеваемост: " + Math.floor((data.streak / data.goal) * 1000)/10 + "%";
+            percent.innerText = "Успеваемост: 46.6%";
             percent.classList.add("percent");
             document.getElementById(id).firstChild.appendChild(percent);
 
@@ -236,6 +238,7 @@
             document.getElementById(id).classList = ["habit"];
             document.getElementById(id).firstChild.classList = ["text"];
             document.getElementById(id).lastChild.classList = ["days"];
+            document.getElementById("days-big").id = "days";
 
             let currentDate = new Date();
             currentDate.setDate(currentDate.getDate() - 7);
