@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="./css/home.css">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body onload="init()">
@@ -156,16 +157,7 @@
     }
 
     function expand(id) {
-        xhr.open("GET", "/habit/get?id=" + id, true);
-        xhr.send();
-        xhr.onload = () => {
-            const data = JSON.parse(xhr.response);
-            if(data.error) {
-                document.location.href = "/home";
-            } else {
-                expandHabit(id, !size.find(h => h.id === id).big, data);
-            }
-        }
+        expandHabit(id, !size.find(h => h.id === id).big, user.habits.find(h => h.id === id));
     }
 
     function expandHabit(id, big, data) {
@@ -182,7 +174,16 @@
             document.getElementById(id).firstChild.classList = ["text-big"];
             document.getElementById(id).lastChild.classList = ["days-big"];
 
-            // document.getElementById("month").textContent = months[currentDate.getMonth()];
+            let percent = document.createElement("p");
+            percent.innerText = ((data.streak / data.goal) * 100) + "%";
+            percent.classList.add("percent");
+            document.getElementById(id).firstChild.appendChild(percent);
+
+            let deleteButton = document.createElement("button");
+            deleteButton.classList.add("delete");
+            deleteButton.innerHTML = "<i class='fa fa-trash-o'></i>";
+            deleteButton.onclick = () => {deleteHabit(id)};
+            document.getElementById(id).firstChild.appendChild(deleteButton);
 
             let graph = document.getElementById(id).lastChild;
             graph.innerHTML = "";
@@ -264,6 +265,8 @@
             }
             
             document.getElementById(id).lastChild.innerHTML = days;
+            document.getElementById(id).firstChild.removeChild(document.getElementById(id).firstChild.lastChild);
+            document.getElementById(id).firstChild.removeChild(document.getElementById(id).firstChild.lastChild);
         }
     }
 
@@ -313,7 +316,6 @@
                 document.getElementById("error").innerHTML = response.error;
             } else {
                 user.habits = response;
-                formData(user);
             }
             return response;
         })
