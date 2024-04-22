@@ -81,10 +81,6 @@ app.get("/quote", (req, res) => {
     res.status(200).json(quotes[random(0, quotes.length)]);
 })
 
-app.get("/open", (req, res) => {
-    res.status(200).sendFile(path.join(__dirname, "public", "habit.html"));
-})
-
 function resetHabits() {
     users.forEach(user => {
         user.habits.forEach(habit => {
