@@ -5,7 +5,7 @@ const path = require("path");
 const bodyParser = require('body-parser');
 const fs = require("fs");
 const { v4: uuidv4 } = require('uuid');
-const PORT = 3000;
+const PORT = process.env.PORT || 8080;
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
