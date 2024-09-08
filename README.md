@@ -65,4 +65,4 @@ This project is licensed under the CC0 1.0 License. See the [LICENSE](LICENSE) f
 
 ## Contact
 
-If you have any questions or feedback, feel free to contact us at vencislav2.manoilov@gmail.com
+If you have any questions or feedback, feel free to contact us at vencislav@manoilov.email
